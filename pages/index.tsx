@@ -1,9 +1,9 @@
 import {useState} from "react";
 import type {NextPage} from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import FileUploader from "../components/fileUploader";
-import RecipeRenderer from "../components/recipeRenderer";
+import FileUploader from "../components/FileUploader";
+import RecipeRenderer from "../components/RecipeRenderer";
+import Footer from "../components/Footer";
 
 const Home: NextPage = () => {
     const [recipe, setRecipe] = useState();
@@ -11,13 +11,14 @@ const Home: NextPage = () => {
     return (
         <div>
             <Head>
-                <title>Recipetron 🥩</title>
+                <title>Recipetron</title>
                 <meta name="description" content="Cook more, easily"/>
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon"
+                      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥩</text></svg>"/>
             </Head>
 
-            <main className="flex justify-center h-full">
-                <div className="my-32 align-center">
+            <main className="flex justify-center items-center h-screen text-center">
+                <div className="pb-32 align-center">
                     <h1 className="text-5xl mb-16">
                         Welcome to <span className="text-red-800">Recipetron</span>
                     </h1>
@@ -28,17 +29,7 @@ const Home: NextPage = () => {
                 </div>
             </main>
 
-            <footer className="fixed bottom-0 left-0 right-0 flex justify-center border-t-2 py-8">
-                <a
-                    href="https://github.com/stavros-liaskos/recipetron"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Powered by 🥩 and <Image alt="github"
-                                             src="https://github.githubassets.com/images/icons/emoji/octocat.png"
-                                             height="20" width="20"/>
-                </a>
-            </footer>
+            <Footer/>
         </div>
     )
 }
