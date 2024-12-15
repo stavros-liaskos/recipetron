@@ -1,12 +1,12 @@
-interface IIngredients {
+export type TIngredients = {
   unit: string;
   name: string;
   qty: number;
   comments?: string;
-}
+};
 
-export interface IRecipe {
+export type TRecipe = {
   name: string;
-  ingredients: IIngredients[];
+  ingredients: TIngredients[];
   comments?: string;
-}
+};
