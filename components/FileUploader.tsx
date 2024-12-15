@@ -46,6 +46,7 @@ const FileUploader = ({
         className="hidden"
         ref={inputEl}
         type="file"
+        aria-label="file"
         id="file"
         accept=".json"
         onChange={handleFileChosen}
