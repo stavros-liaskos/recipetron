@@ -1,9 +1,7 @@
-import { useState } from "react";
-import { IRecipe } from "../types/types";
+import { TRecipe } from "../types/types";
+import Ingredients from "./Ingredients";
 
-const RecipeRenderer = ({ name, ingredients, comments }: IRecipe) => {
-  const [multiplier, setMultiplier] = useState(1);
-
+const RecipeRenderer = ({ name, ingredients, comments }: TRecipe) => {
   if (!name || !ingredients || !ingredients.length) {
     return null;
   }
@@ -21,32 +19,7 @@ const RecipeRenderer = ({ name, ingredients, comments }: IRecipe) => {
             <th>Comments</th>
           </tr>
         </thead>
-        <tbody>
-          {ingredients.map(({ qty, unit, name, comments }, key) => (
-            <tr key={key} className="border-black border-b-2">
-              <td>
-                <input type="checkbox" />
-              </td>
-              <td>
-                <input
-                  className="text-center"
-                  type="number"
-                  min={0.1}
-                  step={qty % 1 ? 0.01 : 0.1}
-                  onChange={(e) =>
-                    setMultiplier(parseFloat(e.target.value) / qty)
-                  }
-                  value={(qty * multiplier)
-                    .toFixed(2)
-                    .replace(/(\.0+|0+)$/, "")}
-                />
-              </td>
-              <td>{unit}</td>
-              <td>{name}</td>
-              <td>{comments}</td>
-            </tr>
-          ))}
-        </tbody>
+        <Ingredients ingredients={ingredients} />
       </table>
       {comments && (
         <p className="bg-cyan-600 text-slate-100 p-6 border-2 rounded">

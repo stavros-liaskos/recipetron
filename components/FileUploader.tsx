@@ -1,30 +1,44 @@
-import { Dispatch, SetStateAction, useRef } from "react";
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useRef,
+} from "react";
+import { TRecipe } from "../types/types";
 
 const FileUploader = ({
   setRecipe,
   hasRecipe,
 }: {
-  setRecipe: Dispatch<SetStateAction<unknown>>;
+  setRecipe: Dispatch<SetStateAction<TRecipe | undefined>>;
   hasRecipe: boolean;
 }) => {
   const inputEl = useRef<HTMLInputElement>(null);
-  let fileReader: FileReader;
 
-  const handleFileRead = () => {
-    const content = fileReader.result;
-    if (Boolean(content)) {
-      setRecipe(JSON.parse(content as string));
-    }
-  };
+  const handleFileRead = useCallback(
+    (e: ProgressEvent<FileReader>) => {
+      const fileContent = e.target?.result;
 
-  const handleFileChosen = (file?: File) => {
-    if (!file) {
-      return;
-    }
-    fileReader = new FileReader();
-    fileReader.onloadend = handleFileRead;
-    fileReader.readAsText(file);
-  };
+      if (Boolean(fileContent)) {
+        setRecipe(JSON.parse(fileContent as string) as TRecipe);
+      }
+    },
+    [setRecipe],
+  );
+
+  const handleFileChosen = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const file = event.target?.files?.[0];
+      if (!file) {
+        return;
+      }
+      const fileReader = new FileReader();
+      fileReader.onloadend = handleFileRead;
+      fileReader.readAsText(file);
+    },
+    [handleFileRead],
+  );
 
   return (
     <div className="mt-16">
@@ -34,7 +48,7 @@ const FileUploader = ({
         type="file"
         id="file"
         accept=".json"
-        onChange={(e) => handleFileChosen(e?.target?.files?.[0])}
+        onChange={handleFileChosen}
       />
       <button
         className="border-red-400 border-2 px-4 py-2 rounded-md cursor-pointer"
