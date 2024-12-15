@@ -15,6 +15,7 @@ const RecipeRenderer = ({name, ingredients}: IRecipe) => {
             <table className="table-auto border-2 border-black p-4">
                 <thead>
                 <tr className="border-black border-b-2">
+                    <th>Complete</th>
                     <th>Quantity</th>
                     <th>Unit</th>
                     <th>Name</th>
@@ -24,7 +25,7 @@ const RecipeRenderer = ({name, ingredients}: IRecipe) => {
                 <tbody>
                 {ingredients.map(({qty, unit, name, comments}, key) => (
                     <tr key={key} className="border-black border-b-2">
-
+                        <td><input type="checkbox"/></td>
                         <td>
                             <input className="text-center" type="number" min={0.1}
                                    step={qty % 1 ? 0.01 : 0.1}
