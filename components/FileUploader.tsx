@@ -1,12 +1,14 @@
-import {useRef} from "react";
+import {Dispatch, SetStateAction, useRef} from "react";
 
-const FileUploader = ({setRecipe, hasRecipe}: { setRecipe: Function, hasRecipe: boolean }) => {
+const FileUploader = ({setRecipe, hasRecipe}: { setRecipe:  Dispatch<SetStateAction<unknown>>, hasRecipe: boolean }) => {
     const inputEl = useRef<HTMLInputElement>(null);
     let fileReader: FileReader;
 
     const handleFileRead = () => {
         const content = fileReader.result;
-        content && setRecipe(JSON.parse(content as string));
+        if (Boolean(content)){
+            setRecipe(JSON.parse(content as string));
+        }
     };
 
     const handleFileChosen = (file?: File) => {

@@ -9,9 +9,8 @@ const RecipeRenderer = ({name, ingredients}: IRecipe) => {
     }
 
     return (
-        <div className="flex justify-center flex-col">
+        (<div className="flex justify-center flex-col">
             <h2 className="text-3xl underline text-center">{name}</h2>
-
             <table className="table-auto border-2 border-black p-4">
                 <thead>
                 <tr className="border-black border-b-2">
@@ -39,8 +38,8 @@ const RecipeRenderer = ({name, ingredients}: IRecipe) => {
                     </tr>
                 ))}</tbody>
             </table>
-        </div>
-    )
+        </div>)
+    );
 }
 
 export default RecipeRenderer
