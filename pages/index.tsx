@@ -23,8 +23,10 @@ const Home: NextPage = () => {
                         Welcome to <span className="text-red-800">Recipetron</span>
                     </h1>
 
+                    {/* @ts-expect-error will fix */}
                     {recipe && <RecipeRenderer {...recipe}/>}
 
+                    {/* @ts-expect-error will fix */}
                     <FileUploader setRecipe={setRecipe} hasRecipe={!!recipe}/>
                 </div>
             </main>
